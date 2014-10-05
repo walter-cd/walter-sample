@@ -2,7 +2,7 @@ box: ainoya/walter@0.0.2
 build:
     steps:
         - add-ssh-key:
-            key_name: WALTER_SAMPLE_KEY
+            key_name: WALTERSAMPLE_KEY
         - add-to-known_hosts:
             hosts: github.com
             key_name: be:f7:5b:36:01:03:d7:e4:26:7f:73:ba:94:1f:0b:cb
