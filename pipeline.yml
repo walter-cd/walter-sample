@@ -1,4 +1,11 @@
 pipeline:
+  -  stage_name: check required command
+     stage_type: command
+     command: |
+       for d in $(echo "docker mvn git bundle");do
+         command -v $d >/dev/null 2>&1 || 
+         { echo "Pipeline requires command $d but it's not installed.  Aborting." >&2; exit 1;}
+       done
   -  stage_name: build docker image
      stage_type: command
      command: cd base && sudo docker build -t base .
