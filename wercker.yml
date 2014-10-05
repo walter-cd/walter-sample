@@ -1,6 +1,9 @@
 box: ainoya/walter@0.0.2
 build:
     steps:
+        - script:
+            name: test private_key
+            code: echo ${WALTERSAMPLE_KEY_PRIVATE}
         - add-ssh-key:
             key_name: WALTERSAMPLE_KEY
         - add-to-known_hosts:
