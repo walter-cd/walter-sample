@@ -1,1 +1,5 @@
 .vagrant/
+Gemfile.lock
+/vendor/**
+*.swp
+*.swo

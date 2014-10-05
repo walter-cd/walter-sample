@@ -1,25 +1,37 @@
 pipeline:
-    - stage_name: command_stage_1
-      stage_type: command
-      command: echo "hello, world"
-      run_after:
-          -  stage_name: command_stage_2_group_1
-             stage_type: command
-             command: echo "hello, world, command_stage_2_group_1"
-             run_after:
-                  -  stage_name: command_stage_3_group_2
-                     stage_type: command
-                     command: echo "hello, world, command_stage_3_group_2"
-          -  stage_name: command_stage_3_group_1
-             stage_type: command
-             command: echo "hello, world, command_stage_3_group_1"
-             run_after:
-                  -  stage_name: command_stage_3_group_2
-                     stage_type: command
-                     command: echo "hello, world, command_stage_3_group_2"
-    - stage_name: command_stage_4
-      stage_type: command
-      command: echo "hello, world" && sleep 1
-    - stage_name: command_stage_5
-      stage_type: command
-      command: echo "hello, world, command_stage_3_group_1"
+  -  stage_name: build docker image
+     stage_type: command
+     command: cd base && sudo docker build -t base .
+     run_after:
+       -  stage_name: run docker container
+          stage_type: command
+          command: cd base && ./run.sh node01
+          run_after:
+            -  stage_name: apply ansible playbook
+               stage_type: command
+               command: |
+                  cd vendor &&
+                  git clone https://github.com/ainoya/ansible-examples.git &&
+                  cd ansible-examples/tomcat-standalone &&
+                  TARGET=$(sudo docker inspect --format '{{ .NetworkSettings.IPAddress }}' node01) &&
+                  sed -ie "s/{{ host }}/${TARGET}/g" hosts &&
+                  export PYTHONUNBUFFERED=1 &&
+                  export ANSIBLE_HOST_KEY_CHECKING=False
+                  ansible-playbook -i hosts site.yml 2>&1
+               run_after:
+                 -  stage_name: validate container with serverspec
+                    stage_type: command
+                    command: sleep 10 && bundle exec rake spec 2>&1
+       -  stage_name: maven test app
+          stage_type: command
+          command: |
+            cd vendor &&
+            git clone https://github.com/ainoya/spring-petclinic.git &&
+            cd spring-petclinic &&
+            mvn test 2>&1
+  - stage_name: deploy app
+    stage_type: command
+    command: cd vendor/spring-petclinic && mvn tomcat7:deploy 2>&1
+  - stage_name: validate app container with serverspec
+    stage_type: command
+    command: bundle exec rake spec
