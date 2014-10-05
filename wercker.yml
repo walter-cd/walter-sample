@@ -1,0 +1,8 @@
+box: ainoya/walter@0.0.1
+build:
+    steps:
+        - add-ssh-key:
+            key_name: WALTER_SAMPLE_KEY
+        - script:
+            name: clone walter repository
+            code: git clone http://github.com/ainoya/walter.git vendor/walter
