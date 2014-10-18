@@ -6,7 +6,7 @@ build:
             code: |
               sudo apt-get update -y
         - install-packages:
-            packages: maven ruby ruby-dev bzr mercurial git wget
+            packages: ruby ruby-dev bzr mercurial git wget
         - script:
             name: install java
             code: |-
