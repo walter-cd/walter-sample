@@ -12,5 +12,5 @@ build:
                 git clone git@github.com:ainoya/walter.git vendor/walter
                 cd vendor/walter && ./build
         - script:
-            name execute deployment pipeline with walter
-            code :./vendor/walter/bin/walter -c ./pipeline.yml
+            name: execute deployment pipeline with walter
+            code : ./vendor/walter/bin/walter -c ./pipeline.yml
