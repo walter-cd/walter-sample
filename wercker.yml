@@ -6,11 +6,11 @@ build:
         - add-to-known_hosts:
             hostname: github.com
             key_name: be:f7:5b:36:01:03:d7:e4:26:7f:73:ba:94:1f:0b:cb
-        - build-walter:
+        - script: 
             name: build walter
             code: |
                 git clone git@github.com:ainoya/walter.git vendor/walter
                 cd vendor/walter && ./build
-        - exec-deployment-pipeline:
+        - script:
             name execute deployment pipeline with walter
             code :./vendor/walter/bin/walter -c ./pipeline.yml
