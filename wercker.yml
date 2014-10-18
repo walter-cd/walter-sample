@@ -7,7 +7,8 @@ build:
             hostname: github.com
             key_name: be:f7:5b:36:01:03:d7:e4:26:7f:73:ba:94:1f:0b:cb
         - script: 
-            name: docker ps
+            name: check docker command
+            code: docker ps
         - script: 
             name: build walter
             code: |
