@@ -1,6 +1,38 @@
-box: ainoya/walter@0.0.3
+box: wercker-labs/docker
 build:
     steps:
+        - script:
+            name: setup
+            code: |
+              sudo apt-get update -y
+              sudo apt-get -y install maven
+              sudo apt-get -y install ruby
+              sudo apt-get -y install ruby-dev
+              sudo gem install bundle --no-ri --no-rdoc
+              sudo gem install rake --no-ri --no-rdoc
+              sudo gem install serverspec --no-ri --no-rdoc
+              
+              # Install golang
+              version="1.3.1"
+              sudo apt-get -y  install bzr
+              sudo apt-get -y  install mercurial
+              sudo apt-get -y  install git
+              sudo apt-get -y  install wget
+              wget http://golang.org/dl/go${version}.linux-amd64.tar.gz
+              sudo tar -C /usr/local -xzf go${version}.linux-amd64.tar.gz
+              echo "export PATH=$PATH:/usr/local/go/bin" | sudo tee -a /etc/profile
+              rm go${version}.linux-amd64.tar.gz 
+              # Set GOPATH
+              export GOPATH="$HOME/go"
+              echo 'export GOPATH="$HOME/go"' | sudo tee -a /etc/profile
+
+              # Adds go bin directory to path so tools
+              # and buils are available on the commandline
+              export PATH="$PATH:$GOPATH/bin"
+              echo 'export PATH="$PATH:$GOPATH/bin"' | sudo tee -a /etc/profile
+
+              # Make actual go workspace dir structure
+              mkdir -p "$HOME/go/{src,pkg,bin}"
         - ainoya/add-ssh-key@1.0.2:
             key_name: WALTERSAMPLE_KEY
         - add-to-known_hosts:
