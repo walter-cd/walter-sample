@@ -1,6 +1,8 @@
 Walter Sample
 ==============
 
+[![wercker status](https://app.wercker.com/status/5de2ade88aca62f804655788e864dfb3/m "wercker status")](https://app.wercker.com/project/bykey/5de2ade88aca62f804655788e864dfb3)
+
 This is example project which deliver deployment pipeline with using [walter].
 
 Deployment pipeline represented with [pipeline.yml][pipe-sample] executes tasks,
