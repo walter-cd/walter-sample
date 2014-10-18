@@ -1,6 +1,40 @@
-# Walter Sample
+Walter Sample
+==============
 
-## What is this?
+This is example project which deliver deployment pipeline with using [walter].
+
+Deployment pipeline represented with [pipeline.yml][pipe-sample] executes tasks,
+in parallel/serially as described.  
+
+Walkthrough
+-----------
+
+For execute this deployment pipeline,
+you need to install [walter].
+
+After you install walter, execute command below in the repoository checked out,
+
+    walter -c ./pipeline.yml
+
+Deployment Pipeline overview
+----------------------------
+
+Deployment pipeline is described in [pipeline.yml][pipe-sample].
+
+When you execute [walter] in this project,
+then walter start the deployment pipeline.
+
+[pipeline.yml][pipe-sample] is as shown in figure below:
+
+![pipeline image](http://i.gyazo.com/61523acf9f1bd4bf3f74651a8f0cc607.png)
+
+Reference
+----------
+
+- [Continuous Delivery: Anatomy of the Deployment Pipeline][about-cd]
+- [walter]
 
 
-
+[pipe-sample]: https://github.com/ainoya/walter-sample/blob/master/pipeline.yml
+[about-cd]: http://www.informit.com/articles/article.aspx?p=1621865
+[walter]: http://github.com/recruit-tech/walter
