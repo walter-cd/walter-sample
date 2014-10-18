@@ -6,6 +6,13 @@ This is example project which deliver deployment pipeline with using [walter].
 Deployment pipeline represented with [pipeline.yml][pipe-sample] executes tasks,
 in parallel/serially as described.  
 
+- Build docker image
+- Run docker container
+- Provision container with ansible
+- Test spring app([petclinic]) with maven
+- Build app with maven
+- Deploy app to container
+
 Walkthrough
 -----------
 
@@ -38,3 +45,4 @@ Reference
 [pipe-sample]: https://github.com/ainoya/walter-sample/blob/master/pipeline.yml
 [about-cd]: http://www.informit.com/articles/article.aspx?p=1621865
 [walter]: http://github.com/recruit-tech/walter
+[petclinic]: https://github.com/ainoya/spring-petclinic
