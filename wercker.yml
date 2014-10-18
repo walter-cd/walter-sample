@@ -64,6 +64,13 @@ build:
 
               # Make actual go workspace dir structure
               mkdir -p "$HOME/go/{src,pkg,bin}"
+        - script:
+            name: install ansible
+            code: |
+              sudo apt-get -y install software-properties-common
+              sudo apt-add-repository ppa:ansible/ansible
+              sudo apt-get -y update
+              sudo apt-get -y install ansible
         - ainoya/add-ssh-key@1.0.2:
             key_name: WALTERSAMPLE_KEY
         - add-to-known_hosts:
