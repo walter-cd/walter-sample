@@ -73,6 +73,8 @@ build:
               sudo apt-get -y install ansible
         - ainoya/add-ssh-key@1.0.2:
             key_name: WALTERSAMPLE_KEY
+        - ainoya/add-ssh-key@1.0.2:
+            key_name: ANSIBLE 
         - add-to-known_hosts:
             hostname: github.com
             key_name: be:f7:5b:36:01:03:d7:e4:26:7f:73:ba:94:1f:0b:cb
