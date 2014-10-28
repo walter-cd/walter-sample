@@ -8,10 +8,6 @@ build:
         - install-packages:
             packages: ruby ruby-dev bzr mercurial git wget
         - script:
-            name: copy settings.xml for maven
-            code: |
-              cp ./settings.xml ~/.m2/settings.xml
-        - script:
             name: install java
             code: |-
               # Remove java from base box
@@ -75,6 +71,10 @@ build:
               sudo apt-add-repository -y ppa:ansible/ansible
               sudo apt-get -y update
               sudo apt-get -y install ansible
+        - script:
+            name: copy settings.xml for maven
+            code: |
+              cp ./settings.xml ~/.m2/settings.xml
         - ainoya/add-ssh-key@1.0.2:
             key_name: WALTERSAMPLE_KEY
         - ainoya/add-ssh-key@1.0.2:
