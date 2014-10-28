@@ -17,7 +17,7 @@ build:
               ! type java || { echo "I expected java to be not available. Java version is: $(java -version). Aborting."; exit 1; }
 
               # Add webupd8 team repository that contains the 3 major oracle-java versions
-              sudo add-apt-repository ppa:webupd8team/java -y -qq
+              sudo add-apt-repository ppa:webupd8team/java -y
               sudo apt-get -y -qq update
 
               # Accept the oracle license
