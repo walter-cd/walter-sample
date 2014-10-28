@@ -4,21 +4,21 @@ build:
         - script:
             name: setup
             code: |
-              sudo apt-get update -y
+              sudo apt-get update -y -qq
         - install-packages:
             packages: ruby ruby-dev bzr mercurial git wget
         - script:
             name: install java
             code: |-
               # Remove java from base box
-              sudo apt-get -y purge openjdk-\* icedtea-\* icedtea6-\*
+              sudo apt-get -y -qq purge openjdk-\* icedtea-\* icedtea6-\*
 
               # Assert that java is not available anymore
               ! type java || { echo "I expected java to be not available. Java version is: $(java -version). Aborting."; exit 1; }
 
               # Add webupd8 team repository that contains the 3 major oracle-java versions
-              sudo add-apt-repository ppa:webupd8team/java -y
-              sudo apt-get -y update
+              sudo add-apt-repository ppa:webupd8team/java -y -qq
+              sudo apt-get -y -qq update
 
               # Accept the oracle license
               echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
