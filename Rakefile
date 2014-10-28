@@ -17,7 +17,7 @@ namespace :spec do
   targets.each do |target|
     desc "Run serverspec tests to #{target}"
     RSpec::Core::RakeTask.new(target.to_sym) do |t|
-      ENV['TARGET_HOST'] = `sudo docker inspect --format '{{ .NetworkSettings.IPAddress }}' #{target}`.chomp
+      ENV['TARGET_HOST'] = `docker inspect --format '{{ .NetworkSettings.IPAddress }}' #{target}`.chomp
       t.pattern = "spec/#{target}/*_spec.rb"
     end
   end

@@ -1,14 +1,15 @@
 pipeline:
-  -  stage_name: check required command
+  -  stage_name: check required command and setup env
      stage_type: command
      command: |
        for d in $(echo "docker mvn git bundle");do
          command -v $d >/dev/null 2>&1 || 
          { echo "Pipeline requires command $d but it's not installed.  Aborting." >&2; exit 1;}
        done
+       bundle install
   -  stage_name: build docker image
      stage_type: command
-     command: cd base && sudo docker build -t base .
+     command: cd base && docker build -t base .
      run_after:
        -  stage_name: run docker container
           stage_type: command
@@ -20,11 +21,11 @@ pipeline:
                   cd vendor &&
                   git clone https://github.com/ainoya/ansible-examples.git &&
                   cd ansible-examples/tomcat-standalone &&
-                  TARGET=$(sudo docker inspect --format '{{ .NetworkSettings.IPAddress }}' node01) &&
+                  TARGET=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' node01) &&
                   sed -ie "s/{{ host }}/${TARGET}/g" hosts &&
                   export PYTHONUNBUFFERED=1 &&
                   export ANSIBLE_HOST_KEY_CHECKING=False
-                  ansible-playbook -i hosts site.yml 2>&1
+                  ansible-playbook -i hosts site.yml -T 30 -c ssh 2>&1
                run_after:
                  -  stage_name: validate container with serverspec
                     stage_type: command
@@ -35,7 +36,7 @@ pipeline:
             cd vendor &&
             git clone https://github.com/ainoya/spring-petclinic.git &&
             cd spring-petclinic &&
-            mvn test 2>&1
+            mvn test 2>&1 > /dev/null
   - stage_name: deploy app
     stage_type: command
     command: cd vendor/spring-petclinic && mvn tomcat7:deploy 2>&1
