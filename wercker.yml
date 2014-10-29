@@ -37,10 +37,10 @@ build:
               type ant || { echo "I expected ant to be available. Aborting."; exit 1; }
 
               # Install maven
-              sudo add-apt-repository "deb http://ppa.launchpad.net/natecarlson/maven3/ubuntu precise main" -y --force-yes
+              sudo add-apt-repository "deb http://ppa.launchpad.net/natecarlson/maven3/ubuntu precise main" -y
               sudo apt-get update -y -qq
-              sudo apt-get install maven3 -y -qq
-
+              sudo apt-get install maven3 -y -qq --force-yes
+              sudo ln -s /usr/share/maven3/bin/mvn /usr/bin/mvn
 
               type mvn || { echo "I expected maven to be available. Aborting."; exit 1; }
         - script:
