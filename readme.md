@@ -1,7 +1,7 @@
 Walter Sample
 ==============
 
-[![wercker status](https://app.wercker.com/status/5de2ade88aca62f804655788e864dfb3/m "wercker status")](https://app.wercker.com/project/bykey/5de2ade88aca62f804655788e864dfb3)
+[![wercker status](https://app.wercker.com/status/185544a783959c5c1015c4f1bfe9929f/m "wercker status")](https://app.wercker.com/project/bykey/185544a783959c5c1015c4f1bfe9929f)
 
 This is example project which deliver deployment pipeline with using [walter].
 
