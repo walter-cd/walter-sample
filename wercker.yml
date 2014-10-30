@@ -82,13 +82,10 @@ build:
             key_name: WALTERSAMPLE_KEY
         - ainoya/add-ssh-key@1.0.2:
             key_name: ANSIBLE
-        - add-to-known_hosts:
-            hostname: github.com
-            key_name: be:f7:5b:36:01:03:d7:e4:26:7f:73:ba:94:1f:0b:cb
         - script:
             name: build walter
             code: |
-                git clone git@github.com:ainoya/walter.git vendor/walter
+                git clone https://github.com/walter-cd/walter.git vendor/walter
                 cd vendor/walter && ./build
         - script:
             name: execute deployment pipeline with walter
